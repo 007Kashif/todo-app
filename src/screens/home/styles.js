@@ -4,6 +4,7 @@ import {
     heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
+import fonts from '../../constants/Fonts';
 import Colors from '../../constants/ColorConstants';
 import Fonts from '../../constants/FontsContstants';
 
@@ -12,16 +13,33 @@ isIphoneX = DeviceInfo.hasNotch();
 
 
 export const styles = StyleSheet.create({
-    mainContainer: {
+    container: {
         flex: 1,
-        // alignItems: 'center',
         backgroundColor: Colors.white,
         paddingTop: isIphoneX && Platform.OS == 'ios' ? hp(5) : hp(4),
     },
-    title: {
-        fontSize: 16,
-        fontFamily: Fonts.SoraMedium
+    topSection: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: wp(3),
+        paddingVertical: hp(1)
     },
-    buttonListContainer: {
+    input: {
+        padding: 10,
+        width: wp(80),
+        height: hp(5),
+        borderRadius: 5,
+        backgroundColor: Colors.lightBeige
     },
+    buttonText: {
+        fontSize: fonts.P4,
+        fontWeight: '500',
+        fontFamily: Fonts.SoraRegular,
+    },
+    button: {
+        width: wp(12),
+        height: hp(5),
+        borderRadius: 5,
+    }
 })
