@@ -1,0 +1,49 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Raleway-Bold.ttf",
+      "sha1": "4ab381ecd77519206ff3eaf8ad7653cb825b4496"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Italic.ttf",
+      "sha1": "019ec18d7b50085aada0ce5fc42b36f198e7dc9a"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Light.ttf",
+      "sha1": "df6bea2956c0a2471aef790b6a5458f0822cd898"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Medium.ttf",
+      "sha1": "a3919800d5e4e950c84d162ce1b0abd8010f1650"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Regular.ttf",
+      "sha1": "a31c64db393ad78109933b35c69e0d45ba3b61b6"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Thin.ttf",
+      "sha1": "8fcf432beca391369b26110e88c772c7ffa62894"
+    },
+    {
+      "path": "src/assets/fonts/Sora-Bold.ttf",
+      "sha1": "aead9ef7e53e7130e2f1a71d327c5321ba686b96"
+    },
+    {
+      "path": "src/assets/fonts/Sora-Light.ttf",
+      "sha1": "26b9c00a92c0cd8a912dcbfe765b083ed4e551a9"
+    },
+    {
+      "path": "src/assets/fonts/Sora-Medium.ttf",
+      "sha1": "2ebf5a7efa7b6cc5b59b2229a3b0e6de59af7c9e"
+    },
+    {
+      "path": "src/assets/fonts/Sora-Regular.ttf",
+      "sha1": "85f53239374778c8256be6f4b0926fe2ec02708f"
+    },
+    {
+      "path": "src/assets/fonts/Sora-Thin.ttf",
+      "sha1": "92f36c6574e410c4f4f7d20957b823dd3ee4bada"
+    }
+  ]
+}

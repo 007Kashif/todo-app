@@ -1,0 +1,51 @@
+const Colors = {
+  white: '#ffffff',
+  black: '#000000',
+  primary: '#4f2683',
+  typefacePrimary: '#232323',
+  typefaceSecondary: '#737f84',
+  typefaceSecondaryLight: '#74717a',
+  typefaceSecondaryDark: '#232323',
+  typefaceTernary: '#a0a0a0',
+  typefaceError: '#f71c00',
+  borderColor: '#ddddec',
+  selectedBorderColor: '#4f2683',
+  screenBackgroundColor: '#eef0f7',
+  inputBackgroundColor: '#f5f7f9',
+
+  inputPrimaryColor: '#1a1a1a',
+  inputSecondaryColor: '#737f84',
+
+  shadowColor: 'rgba(0, 0, 0, 0.3)',
+  PALE_GREY: '#eef0f7',
+  avatarBackgroundColor: '#737f84',
+  badgeBackgroundColor: '#ded3b0',
+  loginPrimaryColor: '#36435d',
+  loginSecondaryColor: '#74717a',
+
+  tabBarIconSecondaryColor: '#737f84',
+  tabBarIconPrimaryColor: '#4f2683',
+  // primaryPurple: '#B778D4',
+  primaryBeige: '#CEC0A9',
+  darkBeige: '#6E665A',
+  lightBeige: '#F7F4F0',
+  nonActiveBorderColor: '#CEC0A9',
+  activeBorderColor: '#6E665A',
+  ////////////////////
+  cBlack: '#1D1F22',
+  red: '#EA4131',
+  fbBlue: '#4064AD',
+  lightGrey: '#F1F2F3',
+  darkGrey: '#72757E',
+  clight: '#F1F2F3',
+  lightBackground: '#E0E0E1',
+  cDanger: '#D12727',
+  cGreen: '#5ECE7B',
+  transparent: 'transparent',
+  cBlue: '#0468DB',
+  cGray: '#8D8F9A',
+  darkYellow: '#ECC713',
+  theme: '#202A44'
+};
+
+export default Colors;
