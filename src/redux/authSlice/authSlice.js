@@ -28,13 +28,10 @@ export const postRegister = createAsyncThunk(
     try {
       const response = await postRegisterApi(payload);
       const data = response.data;
-      await AsyncStorage.setItem(
-        "userToken",
-        JSON.stringify(data?.user?.token)
-      );
       return data;
     } catch (err) {
-      throw err.message == "Network Error" ? err?.message : err?.response?.data;
+      const error = err.message == "Network Error" ? err?.message : err?.response?.data ? err.response?.data?.error?.toString() : "Error";
+      alert(error)
     }
   }
 );
@@ -54,37 +51,11 @@ const authSlice = createSlice({
       });
     },
   },
-  // extraReducers: {
-  //   //login
-  //   [postLogin.fulfilled]: (state, action) => {
-  //     state.userData = action.payload.data;
-  //     state.loading = false;
-  //   },
-  //   [postLogin.pending]: (state, action) => {
-  //     state.loading = true;
-  //   },
-  //   [postLogin.rejected]: (state, action) => {
-  //     state.loading = false;
-  //     alert("Invalid credentials");
-  //   },
 
-  //   //register
-  //   [postRegister.fulfilled]: (state, action) => {
-  //     state.userData = action.payload.data;
-  //     state.loading = false;
-  //   },
-  //   [postRegister.pending]: (state, action) => {
-  //     state.loading = true;
-  //   },
-  //   [postRegister.rejected]: (state, action) => {
-  //     state.loading = false;
-  //     alert("Invalid data");
-  //   },
-  // },
   extraReducers: (builder) => {
     //login
     builder.addCase(postLogin.fulfilled, (state, action) => {
-      state.userData = action.payload.data;
+      state.userData = action.payload.user;
       state.loading = false;
     })
     builder.addCase(postLogin.pending, (state, action) => {
@@ -93,21 +64,8 @@ const authSlice = createSlice({
     builder.addCase(postLogin.rejected, (state, action) => {
       state.loading = false;
       alert(action?.error?.message);
-      console.log("🚀 ~ file: authSlice.js ~ line 96 ~ builder.addCase ~ action", action)
+      console.log("🚀 ~ file: authSlice.js ~ line 70 ~ builder.addCase ~ action", action)
     })
-    //register
-    builder.addCase(postRegister.fulfilled, (state, action) => {
-      state.userData = action.payload.data;
-      state.loading = false;
-    })
-    builder.addCase(postRegister.pending, (state, action) => {
-      state.loading = true;
-    })
-    builder.addCase(postRegister.rejected, (state, action) => {
-      state.loading = false;
-      alert("Invalid credentials");
-    })
-
   },
 });
 

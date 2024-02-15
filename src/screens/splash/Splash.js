@@ -1,19 +1,19 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import { View, Text, Image } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
-import {images} from '../../assets/images/images';
+import { images } from '../../assets/images/images';
 import Colors from '../../constants/ColorConstants';
 
-export const Splash = ({navigation}) => {
+export const Splash = ({ navigation }) => {
   const dispatch = useDispatch();
   const state = useSelector(state => state);
 
-  const {authReducer} = state;
+  const { authReducer } = state;
 
   React.useEffect(async () => {
     setTimeout(() => {
-      if (authReducer?.userData?.user) {
+      if (authReducer?.userData?.token) {
         navigation.replace('BottomTab');
       } else {
         navigation.replace('AuthStack');
@@ -29,11 +29,7 @@ export const Splash = ({navigation}) => {
         justifyContent: 'center',
         backgroundColor: Colors.cBlack,
       }}>
-      <Image
-        source={images.logo}
-        resizeMode="contain"
-        style={{height: '50%', width: '90%'}}
-      />
+      <Text style={{ fontSize: 60, color: Colors.white }}>TODO APP</Text>
     </View>
   );
 };

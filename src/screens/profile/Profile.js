@@ -3,6 +3,7 @@ import {
     View,
     Text,
     Image,
+    Alert,
     Pressable,
     TouchableOpacity,
 } from 'react-native';
@@ -15,6 +16,7 @@ import {
 import { styles } from './styles';
 import { images } from '../../assets/images/images';
 import Colors from '../../constants/ColorConstants';
+import { AppLoader } from '../../components';
 
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -26,7 +28,9 @@ export const Profile = (props) => {
     const state = useSelector((state) => state);
     const { authReducer } = state;
     const [user, setUser] = useState(authReducer?.userData?.user)
-    
+
+    const [isLoading, setIsLoading] = useState(false);
+
     const renderEditProfileButton = () => {
         return (
             <TouchableOpacity
@@ -37,9 +41,30 @@ export const Profile = (props) => {
             </TouchableOpacity>
         );
     };
+    const logoutUser = () => {
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+            navigation.navigate('StoreCleaner');
+        }, 1000);
+    };
+
+    const onLogout = () => {
+        Alert.alert(`Alert!`, 'Are you sure you want to logout?', [
+            {
+                text: 'Yes',
+                onPress: () => logoutUser(),
+            },
+            {
+                text: 'Cancel',
+                onPress: () => { },
+            },
+        ]);
+    };
+
     return (
         <View style={styles.mainContainer}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={styles.menuIcon}
                 onPress={() => {
                     navigation.navigate('ProfileTabs');
@@ -50,7 +75,7 @@ export const Profile = (props) => {
                     size={hp(2.4)}
                     color={Colors.white}
                 />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={styles.topViewContainer}>
                 <View style={styles.avatarContainer}>
                     <View style={styles.avatar}>
@@ -67,7 +92,7 @@ export const Profile = (props) => {
                         @{user?.name.toLowerCase()}
                     </Text>
                 </View>
-                <Text style={[styles.nameStyle,{fontSize: 18, fontWeight: '600'}]}>
+                <Text style={[styles.nameStyle, { fontSize: 18, fontWeight: '600' }]}>
                     {user?.role_type}
                 </Text>
                 <Text style={styles.nameStyle}>
@@ -78,21 +103,23 @@ export const Profile = (props) => {
                 </Text>
             </View>
             <View style={styles.bottomSection}>
-                <Pressable
-                    onPress={() => { }}
+                <TouchableOpacity
+                    onPress={onLogout}
                     style={styles.btnStyle}
                 >
-                    <FeatherIcon
+                    {/* <FeatherIcon
                         name='edit'
                         color={Colors.white}
                         size={hp(2)}
-                    />
+                    /> */}
                     <Text style={styles.btnTextStyle}>
-                        Edit profile
+                        Logout
                     </Text>
-                </Pressable>
+                </TouchableOpacity>
 
             </View>
+
+            {isLoading && <AppLoader visible={isLoading} />}
         </View>
     );
 };

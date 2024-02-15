@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   BackHandler,
-  Platform,
+  TouchableOpacity,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -15,25 +14,22 @@ import * as Animatable from 'react-native-animatable';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //Icons
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 //Redux hooks
-import {useSelector, useDispatch} from 'react-redux';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { useSelector, useDispatch } from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 //Components
-import {Button, AppInput, AppLoader} from '../../../components';
+import { Button, AppInput, AppLoader } from '../../../components';
 //Styles
-import {styles} from './styles';
+import { styles } from './styles';
 import Colors from '../../../constants/ColorConstants';
-import {CommonActions} from '@react-navigation/native';
-import {useIsFocused} from '@react-navigation/native';
-import {images} from '../../../assets/images/images';
+import { useIsFocused } from '@react-navigation/native';
+import { images } from '../../../assets/images/images';
 
-import {postLogin} from '../../../redux/authSlice/authSlice';
+import { postLogin } from '../../../redux/authSlice/authSlice';
 
-export const LogIn = ({navigation, route}) => {
+export const LogIn = ({ navigation, route }) => {
   let animationTimer = 100;
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
@@ -44,8 +40,8 @@ export const LogIn = ({navigation, route}) => {
     route?.params?.direction,
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('Test1@test.co');
+  const [password, setPassword] = useState('testpass');
   const [emailErrorMsg, setEmailErrorMsg] = useState('');
   const [passwordErrorMsg, setPasswordErrorMsg] = useState('');
   const [showHidePass, setShowHidePass] = useState(true);
@@ -90,7 +86,7 @@ export const LogIn = ({navigation, route}) => {
     setTimeout(() => {
       navigation.navigate(stack, {
         screen: screen,
-        params: {direction: param},
+        params: { direction: param },
       });
     }, 500);
   };
@@ -146,21 +142,21 @@ export const LogIn = ({navigation, route}) => {
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
       enableOnAndroid={true}
-      contentContainerStyle={{flexGrow: 1}}
+      contentContainerStyle={{ flexGrow: 1 }}
       keyboardShouldPersistTaps="handled"
-      style={{flex: 1, backgroundColor: Colors.white}}>
+      style={{ flex: 1, backgroundColor: Colors.white }}>
       <View style={styles.container}>
         <View style={styles.skipContainer}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setAnimationDirection('left');
-                             navigation.replace('BottomTab');
-                            // alert('Skip Pressed')
-                        }}
-                    >
-                        <Text style={styles.skipText}>Skip</Text>
-                    </TouchableOpacity>
-                </View>
+          <TouchableOpacity
+            onPress={() => {
+              setAnimationDirection('left');
+              navigation.replace('BottomTab');
+              // alert('Skip Pressed')
+            }}
+          >
+            <Text style={styles.skipText}>Skip</Text>
+          </TouchableOpacity>
+        </View>
         <Animatable.View
           duration={animationTimer}
           animation={animation}
@@ -225,7 +221,7 @@ export const LogIn = ({navigation, route}) => {
                     name="email"
                     size={hp(2.5)}
                     color={Colors.white}
-                    style={{marginRight: 10}}
+                    style={{ marginRight: 10 }}
                   />
                 }
                 bgColor={Colors.theme}
