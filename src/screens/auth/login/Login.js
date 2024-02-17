@@ -40,8 +40,8 @@ export const LogIn = ({ navigation, route }) => {
     route?.params?.direction,
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('Test1@test.co');
-  const [password, setPassword] = useState('testpass');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [emailErrorMsg, setEmailErrorMsg] = useState('');
   const [passwordErrorMsg, setPasswordErrorMsg] = useState('');
   const [showHidePass, setShowHidePass] = useState(true);
