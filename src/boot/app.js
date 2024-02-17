@@ -1,17 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {View} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View } from 'react-native';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import NavOptions from '../constants/NavigationOptions';
-import {useSelector, useDispatch} from 'react-redux';
-import {navigationRef} from './rootNavigation.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { navigationRef } from './rootNavigation.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {AuthStack} from './authStack/AuthStack';
-import {BottomTab} from './bottomTab/BottomTab';
-import {Splash} from '../screens/splash/Splash';
-import {StoreCleaner} from '../redux/storeCleaner';
+import { Onboard } from '../screens/splash/Onboard.js';
+import { AuthStack } from './authStack/AuthStack';
+import { BottomTab } from './bottomTab/BottomTab';
+import { Splash } from '../screens/splash/Splash';
+import { StoreCleaner } from '../redux/storeCleaner';
 
 const StackApp = createNativeStackNavigator();
 const navOptionHandler = () => ({
@@ -21,7 +22,7 @@ const navOptionHandler = () => ({
 
 const App = () => {
   const [loginChk, setloginChk] = useState(true);
-  const {authReducer} = useSelector(state => state);
+  const { authReducer } = useSelector(state => state);
   useEffect(() => {
     getUser();
   }, []);
@@ -40,16 +41,21 @@ const App = () => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <NavigationContainer ref={navigationRef}>
         <StackApp.Navigator
           detachInactiveScreens={false}
           initialRouteName="Splash"
         >
 
-            <StackApp.Screen
+          <StackApp.Screen
             name="Splash"
             component={Splash}
+            options={navOptionHandler}
+          />
+          <StackApp.Screen
+            name="Onboard"
+            component={Onboard}
             options={navOptionHandler}
           />
           {/* Auth-Screens Stack */}

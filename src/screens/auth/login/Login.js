@@ -146,7 +146,7 @@ export const LogIn = ({ navigation, route }) => {
       keyboardShouldPersistTaps="handled"
       style={{ flex: 1, backgroundColor: Colors.white }}>
       <View style={styles.container}>
-        <View style={styles.skipContainer}>
+        {/* <View style={styles.skipContainer}>
           <TouchableOpacity
             onPress={() => {
               setAnimationDirection('left');
@@ -156,7 +156,7 @@ export const LogIn = ({ navigation, route }) => {
           >
             <Text style={styles.skipText}>Skip</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <Animatable.View
           duration={animationTimer}
           animation={animation}
