@@ -16,20 +16,21 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 export const ListCard = ({ item, onEdit, onRemove }) => {
     return (
         <View style={styles?.card}>
-            <Text style={styles.title}>ListCard</Text>
+            <View>
+                <Text style={styles.title}>{item?.title || "N/A"}</Text>
+                <Text style={styles.descTxt}>{item?.description || "N/A"}</Text>
+            </View>
             <View style={styles.rowSection}>
                 <TouchableOpacity onPress={onEdit}>
-                    <FontAwesome name='edit' size={hp(3.5)} color={Colors.white} />
+                    <FontAwesome name='edit' size={hp(3.5)} color={Colors.black} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={onRemove}>
-                    <MaterialCommunityIcons name='delete-outline' size={hp(4)} color={Colors.white} />
+                    <MaterialCommunityIcons name='delete-outline' size={hp(4)} color={Colors.red} />
                 </TouchableOpacity>
             </View>
         </View>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     card: {
@@ -37,19 +38,26 @@ const styles = StyleSheet.create({
         marginBottom: hp(1),
         paddingVertical: hp(1),
         paddingHorizontal: wp(3),
-        backgroundColor: Colors.theme,
+        backgroundColor: Colors.lightBeige,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
     },
     title: {
+        maxWidth: wp(70),
         fontSize: fonts.P3,
-        color: Colors.white,
-        fontFamily: Fonts.SoraRegular,
-        maxWidth: wp(70)
+        color: Colors.black,
+        fontFamily: Fonts.SoraMedium,
     },
     rowSection: {
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    descTxt: {
+        maxWidth: wp(70),
+        marginTop: hp(0.3),
+        fontSize: fonts.P4,
+        color: Colors.black,
+        fontFamily: Fonts.SoraLight,
     }
 })

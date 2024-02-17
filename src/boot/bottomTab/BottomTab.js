@@ -17,8 +17,8 @@ import Colors from '../../constants/ColorConstants';
 import { images } from '../../assets/images/images';
 
 //Screens
-import { Home } from '../../screens/home';
 import { Offer } from '../../screens/offer';
+import { HomeStack } from '../homeStack/HomeStack';
 import { Notification } from '../../screens/notifications';
 import { ProfileStack } from '../profileStack/ProfileStack';
 import { useDispatch } from 'react-redux';
@@ -146,7 +146,7 @@ export const BottomTab = () => {
     <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeStack}
         options={navOptionHandler}
       />
       <Tab.Screen

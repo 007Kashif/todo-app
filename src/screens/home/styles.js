@@ -41,5 +41,16 @@ export const styles = StyleSheet.create({
         width: wp(12),
         height: hp(5),
         borderRadius: 5,
+    },
+    emptySection: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    emptyText: {
+        fontWeight: '500',
+        fontSize: fonts.P3,
+        fontFamily: Fonts.SoraRegular,
     }
+
 })
