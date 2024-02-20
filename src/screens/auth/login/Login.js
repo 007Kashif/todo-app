@@ -11,7 +11,6 @@ import {
 } from 'react-native-responsive-screen';
 
 import * as Animatable from 'react-native-animatable';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 //Icons
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
@@ -26,8 +25,6 @@ import { styles } from './styles';
 import Colors from '../../../constants/ColorConstants';
 import { useIsFocused } from '@react-navigation/native';
 import { images } from '../../../assets/images/images';
-
-import { postLogin } from '../../../redux/authSlice/authSlice';
 
 export const LogIn = ({ navigation, route }) => {
   let animationTimer = 100;
@@ -95,7 +92,7 @@ export const LogIn = ({ navigation, route }) => {
     setTimeout(() => {
       setanimateOutData(true);
       setAnimationDirection('left');
-      navigation.replace('BottomTab');
+      navigation.replace('Home');
     }, 1000);
   };
 
@@ -117,27 +114,11 @@ export const LogIn = ({ navigation, route }) => {
       isValid = false;
     }
     if (isValid) {
-      logInUser();
+      // User Can Navigate to List Screen by using data
+      checkAndNavigate()
     }
   };
-  const logInUser = async () => {
-    const body = {
-      email: email,
-      password: password,
-    };
-    setIsLoading(true);
-    dispatch(postLogin(body)).then(async response => {
-      setIsLoading(false);
-      if (response?.payload?.user?.token) {
-        await AsyncStorage.setItem(
-          'userToken',
-          JSON.stringify(response.payload.user.token),
-        ).then(() => {
-          checkAndNavigate();
-        });
-      }
-    });
-  };
+
   return (
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
@@ -146,17 +127,17 @@ export const LogIn = ({ navigation, route }) => {
       keyboardShouldPersistTaps="handled"
       style={{ flex: 1, backgroundColor: Colors.white }}>
       <View style={styles.container}>
-        {/* <View style={styles.skipContainer}>
+        <View style={styles.skipContainer}>
           <TouchableOpacity
             onPress={() => {
+              // Directly Access the listing with out credentials
               setAnimationDirection('left');
-              navigation.replace('BottomTab');
-              // alert('Skip Pressed')
+              navigation.replace('Home');
             }}
           >
             <Text style={styles.skipText}>Skip</Text>
           </TouchableOpacity>
-        </View> */}
+        </View>
         <Animatable.View
           duration={animationTimer}
           animation={animation}

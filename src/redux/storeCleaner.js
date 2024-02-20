@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { navigate } from '../boot/rootNavigation';
 
-import { logoutUser } from './authSlice/authSlice';
-import { resetTodoList } from './todoSlice/todoSlice';
 
 export const StoreCleaner = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -13,8 +11,6 @@ export const StoreCleaner = ({ navigation }) => {
   }, [])
 
   const reduxClear = async () => {
-    dispatch(logoutUser());
-    dispatch(resetTodoList());
   };
 
   return null;

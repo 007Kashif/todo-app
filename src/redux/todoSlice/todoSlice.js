@@ -1,92 +1,43 @@
-import {
-    createSlice,
-    createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import {
-    getListApi, deleteItemApi,
-    createItemApi, updateItemApi
-} from "../../services/api/methods/auth";
+// Initial state
+const initialState = {
+    todoItems: [],
+};
 
-export const getTodoList = createAsyncThunk("get/items", async (payload) => {
-    try {
-        const response = await getListApi(payload?.params?.page);
-        const data = response.data;
-        return data;
-    } catch (err) {
-        throw err.message == "Network Error" ? err?.message : err;
-    }
-});
-
-export const deletListItem = createAsyncThunk("delete/item", async (id) => {
-    try {
-        const response = await deleteItemApi(id);
-        const data = response.data;
-        return data;
-    } catch (err) {
-        throw err.message == "Network Error" ? err?.message : err;
-    }
-});
-
-export const createListItem = createAsyncThunk("post/itemCreate", async (payload) => {
-    try {
-        const response = await createItemApi(payload);
-        const data = response.data;
-        return data;
-    } catch (err) {
-        throw err.message == "Network Error" ? err?.message : err;
-    }
-});
-export const updateListItem = createAsyncThunk("put/itemUpdate", async (payload) => {
-    try {
-        const response = await updateItemApi(payload?.id, payload?.params);
-        const data = response.data;
-        return data;
-    } catch (err) {
-        throw err.message == "Network Error" ? err?.message : err;
-    }
-});
-
+// Create todo slice
 const todoSlice = createSlice({
-    name: "todoListing",
-    initialState: {
-        endPage: null,
-        loading: false,
-        todoList: [],
-        error: "",
-    },
+    name: 'todos',
+    initialState,
     reducers: {
-        resetTodoList: (state, action) => {
-            state.todoList = [];
-            state.endPage = null;
+        // Reducer for creating a todo item
+        createItem(state, action) {
+            const newItem = {
+                id: Date.now(),
+                title: action?.payload?.title,
+                description: action?.payload?.description,
+            };
+            state.todoItems.unshift(newItem);
+        },
+        // Reducer for updating a todo item
+        updateItem(state, action) {
+            const { id, title, description } = action.payload;
+            const itemToUpdate = state.todoItems.find(item => item.id === id);
+            if (itemToUpdate) {
+                itemToUpdate.title = title;
+                itemToUpdate.description = description;
+            }
+        },
+        // Reducer for deleting a todo item
+        deleteItem(state, action) {
+            const idToDelete = action.payload;
+            state.todoItems = state.todoItems.filter(item => item.id !== idToDelete);
         },
     },
-
-    extraReducers: (builder) => {
-        //List
-        builder.addCase(getTodoList.fulfilled, (state, action) => {
-            if (action?.meta?.arg?.params?.page == 1) {
-                state.todoList = action?.payload?.items?.data;
-            } else {
-                state.todoList = [
-                    ...state.todoList,
-                    ...action?.payload?.items?.data,
-                ];
-            }
-            state.endPage = action.payload?.items?.last_page;
-            state.loading = false;
-        })
-        builder.addCase(getTodoList.pending, (state, action) => {
-            state.loading = true;
-        })
-        builder.addCase(getTodoList.rejected, (state, action) => {
-            state.loading = false;
-            console.log(action?.error)
-            // alert(action?.error?.message);
-        })
-    },
-
 });
 
-export const { resetTodoList } = todoSlice.actions;
+// Export actions
+export const { createItem, updateItem, deleteItem } = todoSlice.actions;
+
+// Export reducer
 export default todoSlice.reducer;

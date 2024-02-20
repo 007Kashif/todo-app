@@ -20,7 +20,7 @@ import fonts from '../../constants/Fonts';
 import Colors from '../../constants/ColorConstants';
 import Fonts from '../../constants/FontsContstants';
 
-import { createListItem, updateListItem } from '../../redux/todoSlice/todoSlice';
+import { createItem, updateItem } from '../../redux/todoSlice/todoSlice';
 
 export const CreateItem = (props) => {
     const Item = props?.route?.params;
@@ -47,40 +47,28 @@ export const CreateItem = (props) => {
         }
         if (isValid) {
 
-            Item?.id ? updateItem() : createItem();
+            Item?.id ? updateTodo() : createTodo();
         }
     };
 
-    const createItem = async () => {
+    const createTodo = async () => {
         const body = {
             title: name,
             description: description,
         };
-        setIsLoading(true);
-        dispatch(createListItem(body)).then(async response => {
-            setIsLoading(false)
-            if (response?.payload?.success) {
-                props.navigation.goBack()
-            } else {
-                alert("Something went wrong.")
-            }
-        })
+        dispatch(createItem(body))
+        props.navigation.goBack()
     };
-    const updateItem = async () => {
+
+    const updateTodo = async () => {
         const body = {
             title: name,
             description: description,
         };
-        const payload = { id: Item?.id, params: body }
-        setIsLoading(true);
-        dispatch(updateListItem(payload)).then(async (response) => {
-            setIsLoading(false)
-            if (response?.payload?.success) {
-                props.navigation.goBack()
-            } else {
-                alert("Something went wrong.")
-            }
-        })
+        const payload = { id: Item?.id, title: name, description: description }
+
+        dispatch(updateItem(payload))
+        props.navigation.goBack()
     };
 
     const title = Item?.id ? "Update" : "Create"

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  Alert,
   TouchableOpacity,
   BackHandler,
   ScrollView,
@@ -26,10 +25,8 @@ import {
 import Colors from '../../../constants/ColorConstants';
 //Styles
 import { styles } from './styles';
-import { useDispatch } from 'react-redux';
 
 import { images } from '../../../assets/images/images';
-import { postRegister } from '../../../redux/authSlice/authSlice';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const { StatusBarManager } = NativeModules;
@@ -37,7 +34,6 @@ const { StatusBarManager } = NativeModules;
 let animationTimer = 10;
 
 export const SignUpEmail = ({ navigation, route }) => {
-  const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
   const [showHidePass, setShowHidePass] = useState(true);
@@ -108,8 +104,6 @@ export const SignUpEmail = ({ navigation, route }) => {
     // animation = 'fadeOut';
   }
 
-
-
   const checkUserEmail = () => {
     if (email != '') {
       let reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -149,43 +143,21 @@ export const SignUpEmail = ({ navigation, route }) => {
     }
 
     if (isValid) {
-      //on all condiotions Success
-      registerUser(null);
+      //pssing data then can access
+      checkAndNavigate();
     }
   };
 
-  const onPressRegister = () => {
-    setPassword('');
-    setCPassword('');
-    setErrMsgs({});
-  }
 
-  const registerUser = () => {
-    const body = {
-      email: email,
-      password: password,
-      password_confirmation: password
-    };
-    setIsLoading(true);
-    dispatch(postRegister(body))
-      .then(async (response) => {
-        setIsLoading(false);
-        if (response?.payload?.message) {
-          Alert.alert(`Alert!`, response?.payload?.message, [
-            {
-              text: 'OK',
-              onPress: () => {
-                setAnimationDirection('left');
-                navigateTo('LogIn');
-              },
-            }])
-        }
-      })
-      .catch((err) => { })
-      .then(() => {
-        setIsLoading(false);
-      });
+  const checkAndNavigate = () => {
+    setTimeout(() => {
+      setanimateOutData(true);
+      setAnimationDirection('left');
+      navigation.replace('Home');
+    }, 1000);
   };
+
+
 
   return (
     <View

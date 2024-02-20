@@ -4,13 +4,11 @@ import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-//Auth reducers
-import authReducer from './authSlice/authSlice';
+
 //Listing reducer
 import todoReducer from './todoSlice/todoSlice';
 
 const reducers = combineReducers({
-  authReducer,
   todoReducer
 });
 
