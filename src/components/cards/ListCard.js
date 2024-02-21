@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 import {
     widthPercentageToDP as wp,
@@ -9,55 +9,50 @@ import {
 import fonts from '../../constants/Fonts';
 import Fonts from '../../constants/FontsContstants';
 import Colors from '../../constants/ColorConstants';
+import { images } from '../../assets/images/images';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-export const ListCard = ({ item, onEdit, onRemove }) => {
+export const ListCard = ({ item, onPress }) => {
     return (
         <View style={styles?.card}>
-            <View>
-                <Text style={styles.title}>{item?.title || "N/A"}</Text>
-                <Text style={styles.descTxt}>{item?.description || "N/A"}</Text>
-            </View>
-            <View style={styles.rowSection}>
-                <TouchableOpacity onPress={onEdit}>
-                    <FontAwesome name='edit' size={hp(3.5)} color={Colors.black} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onRemove}>
-                    <MaterialCommunityIcons name='delete-outline' size={hp(4)} color={Colors.red} />
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={styles.container}>
+                <Image
+                    style={styles.itemIcon}
+                    source={images.Shopping_Bag}
+                    defaultSource={images.placeholder}
+                />
+            </TouchableOpacity>
+            <Text numberOfLines={2} style={styles.title}>{item?.name || "N/A"}</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     card: {
-        borderRadius: 5,
-        marginBottom: hp(1),
-        paddingVertical: hp(1),
-        paddingHorizontal: wp(3),
-        backgroundColor: Colors.lightBeige,
-        flexDirection: 'row',
+        width: wp(30),
+        marginRight: wp(2.5),
         alignItems: 'center',
-        justifyContent: 'space-between'
+        marginBottom: hp(1),
+        paddingHorizontal: wp(3),
+        justifyContent: 'center',
+
+    },
+    container: {
+        height: hp(15),
+        borderRadius: 20,
+        justifyContent: 'center',
+        backgroundColor: Colors.lightBeige,
     },
     title: {
-        maxWidth: wp(70),
-        fontSize: fonts.P3,
-        color: Colors.black,
-        fontFamily: Fonts.SoraMedium,
+        marginTop: hp(1),
+        fontSize: fonts.P5,
+        textAlign: 'center',
+        color: Colors.cBlack,
+        fontFamily: Fonts.SoraRegular,
     },
-    rowSection: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    descTxt: {
-        maxWidth: wp(70),
-        marginTop: hp(0.3),
-        fontSize: fonts.P4,
-        color: Colors.black,
-        fontFamily: Fonts.SoraLight,
+    itemIcon: {
+        width: wp(28),
+        height: hp(10),
+        borderRadius: 5,
+        resizeMode: 'contain'
     }
 })

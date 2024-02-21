@@ -9,10 +9,10 @@ const { height, width } = Dimensions.get('window');
 export const styles = StyleSheet.create({
   //Button Styling
   btnContainer: {
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
+    // alignContent: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // alignSelf: 'center',
   },
   buttonTextContainer: {
     justifyContent: 'center',

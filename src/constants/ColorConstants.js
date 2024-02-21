@@ -45,7 +45,8 @@ const Colors = {
   cBlue: '#0468DB',
   cGray: '#8D8F9A',
   darkYellow: '#ECC713',
-  theme: '#202A44'
+  theme: '#202A44',
+  orange: "#fd8301"
 };
 
 export default Colors;

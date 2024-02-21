@@ -26,21 +26,21 @@ const App = () => {
       <NavigationContainer ref={navigationRef}>
         <StackApp.Navigator
           detachInactiveScreens={false}
-          initialRouteName="Splash"
+          initialRouteName="Home"
         >
 
-          <StackApp.Screen
+          {/* <StackApp.Screen
             name="Splash"
             component={Splash}
             options={navOptionHandler}
-          />
+          /> */}
 
           {/* Auth-Screens Stack */}
-          <StackApp.Screen
+          {/* <StackApp.Screen
             name="AuthStack"
             component={AuthStack}
             options={navOptionHandler}
-          />
+          /> */}
           <StackApp.Screen
             name="Home"
             component={HomeStack}

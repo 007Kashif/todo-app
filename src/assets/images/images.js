@@ -1,5 +1,5 @@
 export const images = {
-  logo:require('../images/logo.png'),
+  logo: require('../images/logo.png'),
 
   //Headers
   SearchIcon: require('../images/Search.png'),
@@ -33,5 +33,12 @@ export const images = {
   userplaceholder: require('../images/userplaceholder.png'),
 
   //Loons
-  Loona: require('../images/loona.png')
+  Loona: require('../images/loona.png'),
+
+  //Banner Images
+  Banner1: require("./banner1.jpeg"),
+  Banner2: require("./banner2.jpeg"),
+  Banner3: require("./banner4.jpeg"),
+  Banner4: require("./banner5.jpeg"),
+  Banner5: require("./banner6.jpeg"),
 };

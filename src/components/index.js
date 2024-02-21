@@ -10,4 +10,5 @@ export * from './appInput/AppInput';
 export * from './errorText/ErrorText';
 
 //Card 
-export * from "./cards/ListCard"
+export * from "./cards/ListCard";
+export * from "./cards/BannerCard";

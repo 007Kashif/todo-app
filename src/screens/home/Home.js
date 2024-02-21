@@ -1,103 +1,99 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, FlatList, Alert, TextInput } from 'react-native'
+import React, { useRef, useEffect } from 'react'
+import { View, Image, Text, FlatList, TextInput } from 'react-native'
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { useIsFocused } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { styles } from './styles'
+import { images } from '../../assets/images/images';
 import Colors from '../../constants/ColorConstants';
-import { Button2, ListCard, AppLoader } from '../../components'
+import { BannerCard, ListCard } from '../../components'
 
-import { deleteItem } from '../../redux/todoSlice/todoSlice';
+import { categories } from './StaticData';
+const INTERVAL_DELAY = 3000;
 
 export const Home = (props) => {
-  const dispatch = useDispatch();
-  const focused = useIsFocused();
-
-  const state = useSelector((state) => state);
-  const { todoReducer } = state;
-
-  const [data, setData] = useState(null);
-  const [current, setCurrent] = useState(null)
-  const [isLoading, setIsLoading] = useState(null);
+  const flatListRef = useRef(null);
 
   useEffect(() => {
-    if (todoReducer?.todoItems?.length > 0) {
-      setData(todoReducer?.todoItems)
-      setCurrent(todoReducer?.todoItems)
-    }
-  }, [todoReducer?.todoItems])
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      currentIndex += 1;
+      if (currentIndex >= 5) {
+        currentIndex = 0;
+      }
+      flatListRef.current.scrollToIndex({ animated: true, index: currentIndex });
+    }, INTERVAL_DELAY);
 
-
-  const removeAlert = (id) =>
-    Alert.alert(
-      "Delete Item ?",
-      "Are you sure you want to delete this item?",
-      [
-        { text: "Cancel" },
-        { text: "OK", onPress: () => dispatch(deleteItem(id)) },
-      ]
-    );
-
-  const searchData = (x) => {
-    let text = x.toLowerCase();
-
-    let filtered = current.filter((item) => {
-      return item?.title?.toLowerCase()?.match(text);
-    });
-    setData(filtered);
-  };
+    return () => clearInterval(interval);
+  }, []);
 
   const renderItem = ({ item, index }) => {
+    const isEnd = categories?.length - 1 === index
     return (
-      <View style={{ marginBottom: data?.length - 1 === index ? hp(10) : 0 }}>
-        <ListCard item={item}
-          onRemove={() => (removeAlert(item?.id))}
-          onEdit={() => props?.navigation?.navigate("CreateItem", item)} />
+      <View style={{ marginBottom: isEnd ? hp(5) : 0 }}>
+        <ListCard item={item} />
       </View>
     )
   }
+
+  const renderBanner = ({ item, index }) => {
+    return <BannerCard item={item} />
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles?.topSection}>
+        <View style={styles.rowSection}>
+          <Ionicons color={Colors.orange} name='location-sharp' size={hp(4)} />
+          <View style={{ paddingLeft: wp(1.5) }}>
+            <View style={styles.rowSection}>
+              <Text style={styles.heading}>Brampton</Text>
+              <Ionicons color={Colors.cGray} name='chevron-down' size={hp(3)} />
+            </View>
+            <Text style={styles.locText}>205, Queen St E</Text>
+          </View>
+        </View>
+        <View>
+          <View style={styles.countSection}>
+            <Text style={styles.countText}>22</Text>
+          </View>
+          <Image source={images.Shopping_Bag} style={styles.basket} />
+        </View>
+      </View>
+      <Text style={styles.toastText}>Earliest delivery slot: 1 Jun 10am - 1pm</Text>
+      <View style={styles.searchSection}>
         <TextInput
           style={styles.input}
-          placeholder="Search by title..."
-          placeholderTextColor={Colors.black}
-          onChangeText={(val) => searchData(val)}
+          onChangeText={(val) => { }}
+          placeholderTextColor={Colors.cGray}
+          placeholder="Search Atta, Dal and more..."
         />
-        <Button2
-          IconButton={false}
-          ButtonName={"Add"}
-          ButtonType="Outlined"
-          style={styles.button}
-          TextColor={Colors.white}
-          OutlineColor={Colors.theme}
-          TextStyle={styles.buttonText}
-          ButtonBackground={Colors.theme}
-          onPress={() => props?.navigation?.navigate("CreateItem")}
-        />
+        <View style={styles.searchIcon}>
+          <Image source={images.SearchIcon} style={styles.Search} />
+        </View>
       </View>
-
-      {data?.length ? <View>
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={item => item?.id?.toString()}
-          style={{ paddingHorizontal: wp(3), paddingTop: hp(1) }}
-        />
-      </View> :
-        <View style={styles.emptySection}>
-          <Text style={styles.emptyText}>No Data Found.</Text>
-        </View>}
-
-      {isLoading && <AppLoader visible={isLoading} />}
+      <FlatList
+        horizontal
+        ref={flatListRef}
+        data={[1, 2, 3, 4, 5]}
+        renderItem={renderBanner}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={item => item?.toString()}
+        style={{ paddingHorizontal: wp(2.5), paddingVertical: hp(1.5) }}
+      />
+      <Text style={styles.listHead}>All Categories</Text>
+      <FlatList
+        numColumns={3}
+        data={categories}
+        renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={item => item?.id?.toString()}
+        style={{ paddingHorizontal: wp(2.5), paddingTop: hp(1.5) }}
+      />
     </View>
   )
 }
