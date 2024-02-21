@@ -35,7 +35,10 @@ export const Home = (props) => {
     const isEnd = categories?.length - 1 === index
     return (
       <View style={{ marginBottom: isEnd ? hp(5) : 0 }}>
-        <ListCard item={item} />
+        <ListCard
+          item={item}
+          onPress={() => props?.navigation?.navigate("ItemInfo")}
+        />
       </View>
     )
   }
@@ -76,15 +79,17 @@ export const Home = (props) => {
           <Image source={images.SearchIcon} style={styles.Search} />
         </View>
       </View>
-      <FlatList
-        horizontal
-        ref={flatListRef}
-        data={[1, 2, 3, 4, 5]}
-        renderItem={renderBanner}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={item => item?.toString()}
-        style={{ paddingHorizontal: wp(2.5), paddingVertical: hp(1.5) }}
-      />
+      <View>
+        <FlatList
+          horizontal
+          ref={flatListRef}
+          data={[1, 2, 3, 4, 5]}
+          renderItem={renderBanner}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={item => item?.toString()}
+          style={{ paddingHorizontal: wp(2.5), paddingTop: hp(1.5) }}
+        />
+      </View>
       <Text style={styles.listHead}>All Categories</Text>
       <FlatList
         numColumns={3}

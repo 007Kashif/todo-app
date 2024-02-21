@@ -41,4 +41,11 @@ export const images = {
   Banner3: require("./banner4.jpeg"),
   Banner4: require("./banner5.jpeg"),
   Banner5: require("./banner6.jpeg"),
+
+  //Grocery Image
+  Snacks: require("./snacks.png"),
+  Flakes: require("./flakes.png"),
+  Grocery: require("./grocery.png"),
+  Instant: require("./instant.png"),
+  IceCream: require("./icecream.png"),
 };

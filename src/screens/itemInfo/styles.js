@@ -11,36 +11,32 @@ import Fonts from '../../constants/FontsContstants';
 import DeviceInfo from 'react-native-device-info';
 isIphoneX = DeviceInfo.hasNotch();
 
+
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.white,
-        paddingTop: isIphoneX && Platform.OS == 'ios' ? hp(5) : hp(2),
+        paddingTop: isIphoneX && Platform.OS == 'ios' ? hp(5) : hp(0),
+    },
+    mainSection: {
+        flex: 1,
+        flexDirection: 'row'
     },
     topSection: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        borderColor: Colors.borderColor,
         paddingVertical: hp(1),
+        borderBottomWidth: 1.5,
+        borderTopWidth: 1.5,
         paddingRight: wp(5),
         paddingLeft: wp(3),
     },
-    input: {
-        width: wp(75),
-        padding: wp(3),
-        height: hp(5.5),
-        fontSize: fonts.P4,
-        fontFamily: Fonts.SoraRegular,
-    },
-    buttonText: {
-        fontSize: fonts.P4,
-        fontWeight: '500',
-        fontFamily: Fonts.SoraRegular,
-    },
-    button: {
-        width: wp(12),
-        height: hp(5),
-        borderRadius: 5,
+    leftSection: {
+        width: wp(15),
+        borderRightWidth: 2,
+        borderColor: Colors.borderColor,
     },
     emptySection: {
         flex: 1,
@@ -88,28 +84,9 @@ export const styles = StyleSheet.create({
         color: Colors.cBlack,
         fontFamily: Fonts.SoraLight,
     },
-    toastText: {
-        fontSize: fonts.P4,
-        textAlign: 'center',
-        color: Colors.white,
-        fontFamily: Fonts.SoraRegular,
-        backgroundColor: Colors.cGreen,
-        paddingVertical: hp(0.5)
-    },
-    searchSection: {
-        marginTop: hp(1.5),
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderColor: Colors.borderColor,
-        marginHorizontal: wp(3),
-        borderRadius: hp(10),
-        borderWidth: 1,
-    },
     searchIcon: {
         width: hp(4.5),
         height: hp(4.5),
-        marginRight: wp(2),
         borderRadius: hp(10),
         alignItems: 'center',
         justifyContent: 'center',
@@ -122,10 +99,38 @@ export const styles = StyleSheet.create({
         tintColor: Colors.white
     },
     listHead: {
-        fontSize: fonts.P2,
+        fontSize: fonts.P3,
         color: Colors.cBlack,
         fontFamily: Fonts.SoraMedium,
-        paddingHorizontal: wp(3),
-        marginTop: hp(1.5)
+    },
+    listHead1: {
+        fontSize: fonts.P3,
+        color: Colors.cGray,
+        fontFamily: Fonts.SoraRegular,
+    },
+    listSection: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: hp(1.5),
+        paddingHorizontal: wp(2),
+        borderColor: Colors.borderColor,
+        borderBottomWidth: 1,
+        marginTop: hp(1.5),
+        borderTopWidth: 2,
+    },
+    headImg: {
+        width: hp(5),
+        height: hp(5),
+        borderRadius: 5,
+        marginLeft: wp(2),
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: Colors.borderColor,
+        borderWidth: 1,
+    },
+    headerIcon: {
+        width: hp(4),
+        height: hp(4),
+        resizeMode: 'contain'
     }
 })

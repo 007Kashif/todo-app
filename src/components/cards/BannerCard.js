@@ -21,7 +21,7 @@ export const BannerCard = (props) => {
             style={styles.bgImage}
             source={images[`Banner${item}`]}
             defaultSource={images.placeholder}
-            imageStyle={{ borderRadius: 20, height: hp(25) }}
+            imageStyle={{ borderRadius: 20 }}
         >
             <View style={styles.section}>
                 <Text style={styles.heading}>Hello Summar</Text>
@@ -52,8 +52,8 @@ export const BannerCard = (props) => {
 const styles = StyleSheet.create({
     bgImage: {
         width: wp(80),
-        height: hp(35),
-        marginRight: wp(2),
+        height: hp(25),
+        marginRight: wp(2)
     },
     heading: {
         maxWidth: wp(40),
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.SoraBold,
     },
     section: {
-        height: hp(30),
+        marginTop: hp(4),
         paddingHorizontal: wp(3),
         justifyContent: 'center',
     },

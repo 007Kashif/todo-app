@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Home } from '../../screens/home';
-import { CreateItem } from '../../screens/createItem/CreateItem';
+import { ItemInfo } from '../../screens/itemInfo/ItemInfo';
 
 const StackAuth = createStackNavigator();
 const navOptionHandler = () => ({
@@ -17,8 +17,8 @@ export const HomeStack = () => {
                 options={navOptionHandler}
             />
             <StackAuth.Screen
-                name="CreateItem"
-                component={CreateItem}
+                name="ItemInfo"
+                component={ItemInfo}
                 options={navOptionHandler}
             />
         </StackAuth.Navigator>
