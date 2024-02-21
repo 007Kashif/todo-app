@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.white,
-        paddingTop: isIphoneX && Platform.OS == 'ios' ? hp(5) : hp(2),
+        paddingTop: isIphoneX && Platform.OS == 'ios' ? hp(5) : hp(0.5),
     },
     topSection: {
         flexDirection: 'row',
