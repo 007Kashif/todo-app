@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react'
-import { View, Image, Text, FlatList, TextInput } from 'react-native'
+import React, { useRef, useState, useEffect } from 'react'
+import { View, Image, Text, FlatList, TextInput, TouchableOpacity } from 'react-native'
 
 import {
   widthPercentageToDP as wp,
@@ -10,13 +10,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { styles } from './styles'
 import { images } from '../../assets/images/images';
 import Colors from '../../constants/ColorConstants';
-import { BannerCard, ListCard } from '../../components'
+import { BannerCard, ListCard, InvitationModal } from '../../components'
 
 import { categories } from './StaticData';
 const INTERVAL_DELAY = 3000;
 
 export const Home = (props) => {
   const flatListRef = useRef(null);
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     let currentIndex = 0;
@@ -60,12 +61,15 @@ export const Home = (props) => {
             <Text style={styles.locText}>205, Queen St E</Text>
           </View>
         </View>
-        <View>
+        {/* <View>
           <View style={styles.countSection}>
             <Text style={styles.countText}>22</Text>
           </View>
           <Image source={images.Shopping_Bag} style={styles.basket} />
-        </View>
+        </View> */}
+        <TouchableOpacity onPress={() => setShowModal(true)}>
+          <Text style={styles.shareTxt}>Share & Earn</Text>
+        </TouchableOpacity>
       </View>
       <Text style={styles.toastText}>Earliest delivery slot: 1 Jun 10am - 1pm</Text>
       <View style={styles.searchSection}>
@@ -99,6 +103,12 @@ export const Home = (props) => {
         keyExtractor={item => item?.id?.toString()}
         style={{ paddingHorizontal: wp(2.5), paddingTop: hp(1.5) }}
       />
+
+      {/* InvitationModal */}
+      <InvitationModal
+        modalVisible={showModal}
+        navigation={props?.navigation}
+        setModalVisible={setShowModal} />
     </View>
   )
 }

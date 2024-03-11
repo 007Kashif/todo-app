@@ -127,5 +127,9 @@ export const styles = StyleSheet.create({
         fontFamily: Fonts.SoraMedium,
         paddingHorizontal: wp(3),
         marginTop: hp(1.5)
+    },
+    shareTxt: {
+        color: Colors.cBlack,
+        fontFamily: Fonts.SoraMedium
     }
 })
