@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, Modal, Text, View } from 'react-native'
+
 import Share from 'react-native-share';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 import {
     widthPercentageToDP as wp,
@@ -18,7 +20,23 @@ import fonts from '../../constants/Fonts'
 export const InvitationModal = (props) => {
     const { navigation, modalVisible, setModalVisible } = props;
 
-    const onShareLink = async () => {
+    const generateLink = async () => {
+        try {
+            const link = await dynamicLinks().buildShortLink({
+                link: `https://voicelifeapp123.page.link/dmCn?refCode=QAZ123`,
+                domainUriPrefix: 'https://voicelifeapp123.page.link',
+                android: {
+                    packageName: 'com.voicelifeapp',
+                },
+            }, dynamicLinks.ShortLinkType.DEFAULT)
+            console.log('link:', link)
+            return link
+        } catch (error) {
+            console.log('Generating Link Error:', error)
+        }
+    }
+
+    const onShareLink1 = async () => {
         const referralCode = 'REF123';
         const link = ' https://play.google.com/store/apps/details?id=com.bazaaro.bazaaroapp';
         const message = `Please download app from this link: ${link}.\n Use referral code ${referralCode} for bonus!`;
@@ -30,6 +48,19 @@ export const InvitationModal = (props) => {
             await Share.open(options);
         } catch (error) {
             console.log('Error sharing link: ', error);
+        }
+    };
+
+    const onShareLink = async () => {
+        const getLink = await generateLink()
+        try {
+            const options = {
+                title: 'Share Link and Code',
+                message: getLink,
+            };
+            await Share.open(options);
+        } catch (error) {
+            console.log('Sharing Error:', error)
         }
     };
 

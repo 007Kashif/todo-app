@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import NavOptions from '../constants/NavigationOptions';
@@ -20,9 +21,25 @@ const navOptionHandler = () => ({
 
 const App = () => {
 
+  const HandleDeepLinking = () => {
+    const handleDynamicLinks = async (link) => {
+      console.log('Foreground link handling:', link)
+      let refCode = link.url.split('=').pop()
+      console.log('refCode:', refCode,)
+
+      alert(refCode)
+    }
+    useEffect(() => {
+      const unsubscribe = dynamicLinks().onLink(handleDynamicLinks)
+      return () => unsubscribe()
+    }, [])
+
+    return null
+  }
 
   return (
     <View style={{ flex: 1 }}>
+      <HandleDeepLinking />
       <NavigationContainer ref={navigationRef}>
         <StackApp.Navigator
           detachInactiveScreens={false}

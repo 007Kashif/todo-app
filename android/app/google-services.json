@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "763546894736",
+    "project_id": "fir-sharing-f18a0",
+    "storage_bucket": "fir-sharing-f18a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763546894736:android:c78b0d6718c1f1dc537315",
+        "android_client_info": {
+          "package_name": "com.voicelifeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtxpcqz68zJYHnK9s-8dH_FBN7HSKd0U4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
